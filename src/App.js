@@ -1,5 +1,5 @@
-import React from "react";
-import HarassMap from "./components/HarassMap";
+import React from 'react'
+import HarassMap from './components/HarassMap'
 import {
   AppBar,
   Grid,
@@ -8,22 +8,22 @@ import {
   CardContent,
   CardAction,
   Typography,
-  TextField,
-} from "@material-ui/core";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import HarassForm from "./components/HarassForm";
+  TextField
+} from '@material-ui/core'
+import { withStyles, makeStyles } from '@material-ui/core/styles'
+import HarassForm from './components/HarassForm'
 
-function App() {
+function App () {
   return (
     <div>
-      <AppBar color="primary" position="static">
+      <AppBar color='secondary' position='static'>
         <h1>Creepy Follows</h1>
       </AppBar>
       <Grid container spacing={24} style={{ padding: 24 }}>
-        <Grid item xs={8}>
+        <Grid item xs={12} sm={8}>
           <HarassMap />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4}>
           <Card>
             <CardContent>
               <Typography>
@@ -35,7 +35,7 @@ function App() {
         </Grid>
       </Grid>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
