@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import HarassMarker from "./HarassMarker";
-import axios from "axios";
 
 class HarassMap extends Component {
   static defaultProps = {
@@ -15,25 +14,9 @@ class HarassMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: null,
-      isLoaded: false,
-      harass_markers: [],
+      harass_markers: this.props.harass_markers,
     };
   }
-
-  componentDidMount() {
-    axios
-      .get("https://creepyfollows.herokuapp.com/api/v1/harasses")
-      .then(response => {
-        console.log(response);
-        this.setState({
-          isLoaded: true,
-          harass_markers: response.data.data,
-        });
-      })
-      .catch(error => console.log(error));
-  }
-
   render() {
     return (
       // Important! Always set the container height explicitly
@@ -43,7 +26,7 @@ class HarassMap extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-          {this.state.harass_markers.map(marker => {
+          {this.props.harass_markers.map(marker => {
             return (
               <HarassMarker
                 lat={marker.attributes.latitude}

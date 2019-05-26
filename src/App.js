@@ -1,41 +1,16 @@
-import React from 'react'
-import HarassMap from './components/HarassMap'
-import {
-  AppBar,
-  Grid,
-  Paper,
-  Card,
-  CardContent,
-  CardAction,
-  Typography,
-  TextField
-} from '@material-ui/core'
-import { withStyles, makeStyles } from '@material-ui/core/styles'
-import HarassForm from './components/HarassForm'
+import React from "react";
+import { AppBar } from "@material-ui/core";
+import HarassContainer from "./components/HarassContainer";
 
-function App () {
+function App() {
   return (
     <div>
-      <AppBar color='secondary' position='static'>
+      <AppBar color="secondary" position="static">
         <h1>Creepy Follows</h1>
       </AppBar>
-      <Grid container spacing={24} style={{ padding: 24 }}>
-        <Grid item xs={12} sm={8}>
-          <HarassMap />
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Card>
-            <CardContent>
-              <Typography>
-                <h3>Report a Case</h3>
-              </Typography>
-              <HarassForm />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+      <HarassContainer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
