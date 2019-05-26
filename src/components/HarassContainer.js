@@ -4,6 +4,7 @@ import update from "immutability-helper";
 import axios from "axios";
 import HarassMap from "./HarassMap";
 import HarassForm from "./HarassForm";
+import HarassInfo from "./HarassInfo";
 
 class HarassContainer extends Component {
   constructor(props) {
@@ -31,21 +32,26 @@ class HarassContainer extends Component {
 
   render() {
     return (
-      <Grid container spacing={24} style={{ padding: 24 }}>
-        <Grid item xs={12} sm={8}>
-          <HarassMap harass_markers={this.state.harass_markers} />
+      <div>
+        <Grid container spacing={24} style={{ padding: 24 }}>
+          <Grid item xs={12} sm={8}>
+            <HarassMap harass_markers={this.state.harass_markers} />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Card>
+              <CardContent>
+                <Typography>
+                  <h3>Report a Case</h3>
+                </Typography>
+                <HarassForm />
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <Card>
-            <CardContent>
-              <Typography>
-                <h3>Report a Case</h3>
-              </Typography>
-              <HarassForm />
-            </CardContent>
-          </Card>
+        <Grid container direction="row" spacing={24} style={{ padding: 24 }}>
+          <HarassInfo harass_cases={this.state.harass_markers} />
         </Grid>
-      </Grid>
+      </div>
     );
   }
 }
