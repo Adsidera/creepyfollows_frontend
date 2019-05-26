@@ -1,71 +1,103 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { MenuItem, TextField, Grid, Button, Icon } from '@material-ui/core'
+import React, { Component } from "react";
+import { TextField, Grid, Button } from "@material-ui/core";
+import axios from "axios";
+import Notifier, { openSnackbar } from "./Notifier";
 
-// const useStyles = makeStyles(theme => ({
-//   container: {
-//     display: "flex",
-//     flexWrap: "wrap",
-//   },
-//   textField: {
-//     marginLeft: theme.spacing(1),
-//     marginRight: theme.spacing(1),
-//     width: 200,
-//   },
-//   dense: {
-//     marginTop: 19,
-//   },
-//   menu: {
-//     width: 200,
-//   },
-// }));
-
-function HarassForm () {
+class HarassForm extends Component {
   // const classes = useStyles();
+  constructor(props) {
+    super(props);
+    this.state = {
+      start_address: "Type an address",
+      happened_at: "",
+      description: "Describe what",
+      alert: "",
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  return (
-    <form novalidate autoComplete='off'>
-      <Grid container direction='column' justify='left' alignItems='left'>
-        <Grid item xs={12}>
+  showNotifier(message) {
+    openSnackbar({ message });
+  }
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const harass = {
+      start_address: this.state.start_address,
+      happened_at: this.state.happened_at,
+      description: this.state.description,
+    };
+    axios
+      .post("https://creepyfollows.herokuapp.com/api/v1/harasses", {
+        harass,
+      })
+      .then(res => {
+        console.log(res);
+        console.log("Post successful");
+        console.log(res.data);
+        this.showNotifier("Report successfully registered");
+      })
+      .catch(error => {
+        console.log(error);
+        this.showNotifier("Form is not correctly filled out. Try again");
+      });
+  }
+
+  render() {
+    return (
+      <form noValidate onSubmit={this.handleSubmit}>
+        <Grid container direction="column" justify="left" alignItems="left">
+          <Grid item xs={12}>
+            <TextField
+              id="harass_place"
+              // className={classes.textField}
+              helperText="Where did it happen?"
+              name="start_address"
+              value={this.state.start_address}
+              margin="normal"
+              onChange={this.handleChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              id="harass_date"
+              // className={classes.textField}
+              helperText="When and at what hour did it happen?"
+              type="datetime-local"
+              name="happened_at"
+              value={this.state.happened_at}
+              margin="normal"
+              onChange={this.handleChange}
+            />
+          </Grid>
           <TextField
-            id='harass_place'
-            // className={classes.textField}
-            helperText='Where did it happen?'
-            name='harassplace'
-            margin='normal'
+            id="description"
+            label="Description"
+            helperText="Describe what happened"
+            rows={5}
+            rowsMax={10}
+            name="description"
+            value={this.state.description}
+            margin="normal"
+            multiline
+            variant="filled"
+            onChange={this.handleChange}
           />
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id='harass_date'
-            // className={classes.textField}
-            helperText='When and at what hour did it happen?'
-            type='datetime-local'
-            defaultValue='2019-05-22T22:00'
-            name='harassdate'
-            margin='normal'
-          />
+        <Grid container direction="column" justify="left" alignItems="left">
+          <Grid item>
+            <Button variant="contained" color="primary" type="submit">
+              Save it on the map
+            </Button>
+          </Grid>
         </Grid>
-        <TextField
-          id='description'
-          label='Description'
-          helperText='Describe what happened'
-          rows={5}
-          rowsMax={10}
-          name='description'
-          margin='normal'
-          multiline
-          variant='filled'
-        />
-      </Grid>
-      <Grid container direction='column' justify='left' alignItems='left'>
-        <Grid item>
-          <Button variant='contained' color='primary'>
-            Save it on the map
-          </Button>
-        </Grid>
-      </Grid>
-    </form>
-  )
+        <Notifier />
+      </form>
+    );
+  }
 }
-export default HarassForm
+export default HarassForm;
