@@ -14,7 +14,7 @@ class HarassInfo extends Component {
     return (
       <GridList cols={3}>
         {this.props.harass_cases.map(marker => {
-          return <HarassCard marker={marker} />;
+          return <HarassCard marker={marker} key={marker.id} />;
         })}
       </GridList>
     );
