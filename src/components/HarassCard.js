@@ -1,26 +1,58 @@
 import React, { Component } from "react";
-import { Typography, GridListTile, Paper } from "@material-ui/core";
+import {
+  Typography,
+  GridListTile,
+  Paper,
+  GridListTileBar,
+  ListSubheader,
+  Divider,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+import moment from "moment";
 
 class HarassCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       marker: this.props.marker,
+      friendly_happened_at: moment(
+        this.props.marker.attributes.happened_at
+      ).format("MMMM Do YYYY, h:mm:ss a"),
+      friendly_created_at: moment(
+        this.props.marker.attributes.created_at
+      ).format("MMMM Do YYYY, h:mm:ss a"),
     };
   }
 
   render() {
-    const styles = {
-      margin: 5,
-      padding: 5,
+    const classes = {
+      tile: {
+        margin: 5,
+        padding: 5,
+      },
+      description: {
+        paddingTop: 10,
+        paddingBottom: 10,
+        fontWeight: 100,
+      },
     };
-
     return (
-      <GridListTile style={styles}>
+      <GridListTile key="Subheader" style={classes.tile}>
         <Paper style={{ margin: 3, padding: 25 }}>
-          <Typography>{this.state.marker.attributes.start_address}</Typography>
-          <p>{this.state.marker.attributes.happened_at}</p>
-          <p>{this.state.marker.attributes.description}</p>
+          <Typography variant="h6">
+            {this.state.marker.attributes.start_address}
+          </Typography>
+          <Typography gutterBottom>
+            {this.state.friendly_happened_at}
+          </Typography>
+          <Typography variant="p" style={classes.description} gutterBottom>
+            {this.state.marker.attributes.description}
+          </Typography>
+          <Divider variant="middle" />
+          <Typography variant="caption" display="block" gutterBottom>
+            Reported on {this.state.friendly_created_at}
+          </Typography>
         </Paper>
       </GridListTile>
     );

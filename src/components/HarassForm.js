@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { TextField, Grid, Button } from "@material-ui/core";
 import axios from "axios";
 import Notifier, { openSnackbar } from "./Notifier";
+import { update } from "immutability-helper";
 
 class HarassForm extends Component {
   // const classes = useStyles();
@@ -12,6 +13,7 @@ class HarassForm extends Component {
       happened_at: "",
       description: "Describe what",
       alert: "",
+      editingHarassMarkerId: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,6 +24,7 @@ class HarassForm extends Component {
   }
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+    console.log(this.state);
   }
 
   handleSubmit(event) {
@@ -32,24 +35,25 @@ class HarassForm extends Component {
       description: this.state.description,
     };
     axios
-      .post("https://creepyfollows.herokuapp.com/api/v1/harasses", {
+      .post("http://localhost:4000/api/v1/harasses", {
         harass,
       })
       .then(res => {
         console.log(res);
         console.log("Post successful");
         console.log(res.data);
+        this.props.harass_markers.splice(0, 0, res.data);
         this.showNotifier("Report successfully registered");
       })
       .catch(error => {
         console.log(error);
-        this.showNotifier("Form is not correctly filled out. Try again");
+        this.showNotifier(error);
       });
   }
 
   render() {
     return (
-      <form noValidate onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <Grid container direction="column" justify="left" alignItems="left">
           <Grid item xs={12}>
             <TextField

@@ -18,7 +18,7 @@ class HarassContainer extends Component {
 
   componentDidMount() {
     axios
-      .get("https://creepyfollows.herokuapp.com/api/v1/harasses")
+      .get("http://localhost:4000/api/v1/harasses")
       .then(response => {
         console.log(response);
         this.setState({
