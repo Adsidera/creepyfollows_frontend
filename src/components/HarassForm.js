@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import { TextField, Grid, Button } from "@material-ui/core";
-import axios from "axios";
-import Notifier, { openSnackbar } from "./Notifier";
-import { update } from "immutability-helper";
 
 class HarassForm extends Component {
   // const classes = useStyles();
@@ -11,7 +8,7 @@ class HarassForm extends Component {
     this.state = {
       start_address: "Type an address",
       happened_at: "",
-      description: "Describe what",
+      description: "Describe what happened",
       alert: "",
       editingHarassMarkerId: "",
     };
@@ -19,12 +16,8 @@ class HarassForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  showNotifier(message) {
-    openSnackbar({ message });
-  }
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
-    console.log(this.state);
   }
 
   handleSubmit(event) {
@@ -34,21 +27,8 @@ class HarassForm extends Component {
       happened_at: this.state.happened_at,
       description: this.state.description,
     };
-    axios
-      .post("http://localhost:4000/api/v1/harasses", {
-        harass,
-      })
-      .then(res => {
-        console.log(res);
-        console.log("Post successful");
-        console.log(res.data);
-        this.props.harass_markers.splice(0, 0, res.data);
-        this.showNotifier("Report successfully registered");
-      })
-      .catch(error => {
-        console.log(error);
-        this.showNotifier(error);
-      });
+    this.props.addNewHarass({ harass });
+    this.setState({ [event.target.name]: "" });
   }
 
   render() {
@@ -99,7 +79,6 @@ class HarassForm extends Component {
             </Button>
           </Grid>
         </Grid>
-        <Notifier />
       </form>
     );
   }

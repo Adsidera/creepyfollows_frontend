@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Typography,
-  GridListTile,
-  Paper,
-  GridListTileBar,
-  ListSubheader,
-  Divider,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Typography, GridListTile, Paper, Divider } from "@material-ui/core";
 
 import moment from "moment";
 

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Grid, Card, CardContent, Typography } from "@material-ui/core";
-import update from "immutability-helper";
 import axios from "axios";
 import HarassMap from "./HarassMap";
 import HarassForm from "./HarassForm";
 import HarassInfo from "./HarassInfo";
+import Notifier, { openSnackbar } from "./Notifier";
 
 class HarassContainer extends Component {
   constructor(props) {
@@ -14,6 +14,10 @@ class HarassContainer extends Component {
       isLoaded: false,
       harass_markers: [],
     };
+  }
+
+  showNotifier(message) {
+    openSnackbar({ message });
   }
 
   componentDidMount() {
@@ -30,6 +34,38 @@ class HarassContainer extends Component {
       .catch(error => console.log(error));
   }
 
+  getHarasses = () => {
+    axios
+      .get("http://localhost:4000/api/v1/harasses")
+      .then(response => {
+        console.log(response);
+        this.setState({
+          isLoaded: true,
+          harass_markers: response.data.data,
+          editingHarassMarkerId: null,
+        });
+      })
+      .catch(error => console.log(error));
+  };
+
+  addNewHarass = ({ harass }) => {
+    axios
+      .post("http://localhost:4000/api/v1/harasses", {
+        harass,
+      })
+      .then(res => {
+        console.log(res);
+        console.log("Post successful");
+        console.log(res.data);
+        this.showNotifier("Report successfully registered");
+        this.getHarasses();
+      })
+      .catch(error => {
+        console.log(error);
+        this.showNotifier(error);
+      });
+  };
+
   render() {
     return (
       <div>
@@ -43,11 +79,15 @@ class HarassContainer extends Component {
                 <Typography>
                   <h3>Report a Case</h3>
                 </Typography>
-                <HarassForm />
+                <HarassForm
+                  harass_cases={this.state.harass_markers}
+                  addNewHarass={this.addNewHarass}
+                />
               </CardContent>
             </Card>
           </Grid>
         </Grid>
+        <Notifier />
         <Grid container direction="row" spacing={24} style={{ padding: 24 }}>
           <HarassInfo harass_cases={this.state.harass_markers} />
         </Grid>
