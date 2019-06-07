@@ -14,10 +14,19 @@ class HarassForm extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleReset() {
+    this.setState({
+      description: "",
+      happened_at: "",
+      start_address: "Type an address",
+    });
   }
 
   handleSubmit(event) {
@@ -28,7 +37,7 @@ class HarassForm extends Component {
       description: this.state.description,
     };
     this.props.addNewHarass({ harass });
-    this.setState({ [event.target.name]: "" });
+    this.handleReset(event);
   }
 
   render() {
