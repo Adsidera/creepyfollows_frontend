@@ -50,7 +50,7 @@ class HarassContainer extends Component {
 
   addNewHarass = ({ harass }) => {
     axios
-      .post("http://creepyfollows.herokuapp.com/api/v1/harasses", {
+      .post("https://creepyfollows.herokuapp.com/api/v1/harasses", {
         harass,
       })
       .then(res => {
