@@ -22,7 +22,7 @@ class HarassContainer extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:4000/api/v1/harasses")
+      .get("https://creepyfollows.herokuapp.com/api/v1/harasses")
       .then(response => {
         console.log(response);
         this.setState({
@@ -36,7 +36,7 @@ class HarassContainer extends Component {
 
   getHarasses = () => {
     axios
-      .get("http://localhost:4000/api/v1/harasses")
+      .get("https://creepyfollows.herokuapp.com/api/v1/harasses")
       .then(response => {
         console.log(response);
         this.setState({
@@ -50,7 +50,7 @@ class HarassContainer extends Component {
 
   addNewHarass = ({ harass }) => {
     axios
-      .post("http://localhost:4000/api/v1/harasses", {
+      .post("http://creepyfollows.herokuapp.com/api/v1/harasses", {
         harass,
       })
       .then(res => {
