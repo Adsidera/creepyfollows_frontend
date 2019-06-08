@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       <AppBar color="secondary" position="static">
-        <h1>Creepy Follows</h1>
+        <h1 style={{ paddingLeft: 20 }}>Creepy Follows</h1>
       </AppBar>
       <HarassContainer />
     </div>
