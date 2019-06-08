@@ -8,12 +8,12 @@ class HarassCard extends Component {
     super(props);
     this.state = {
       marker: this.props.marker,
-      friendly_happened_at: moment(
-        this.props.marker.attributes.happened_at
-      ).format("MMMM Do YYYY, h:mm:ss a"),
+      friendly_happened_at: moment
+        .utc(this.props.marker.attributes.happened_at)
+        .format("LLLL"),
       friendly_created_at: moment(
         this.props.marker.attributes.created_at
-      ).format("MMMM Do YYYY, h:mm:ss a"),
+      ).format("LLLL"),
     };
   }
 

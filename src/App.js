@@ -5,7 +5,7 @@ import HarassContainer from "./components/HarassContainer";
 function App() {
   return (
     <div>
-      <AppBar color="secondary" position="static">
+      <AppBar color="secondary" position="static" style={{ paddingLeft: 25 }}>
         <h1>Creepy Follows</h1>
       </AppBar>
       <HarassContainer />
