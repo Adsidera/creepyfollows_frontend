@@ -6,9 +6,9 @@ class HarassForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      start_address: "Type an address",
+      start_address: "",
       happened_at: "",
-      description: "Describe what happened",
+      description: "",
       alert: "",
       editingHarassMarkerId: "",
     };
@@ -47,8 +47,9 @@ class HarassForm extends Component {
           <Grid item xs={12}>
             <TextField
               id="harass_place"
+              label="Where"
               // className={classes.textField}
-              helperText="Where did it happen?"
+              helperText="Street or place where the harassment took place"
               name="start_address"
               value={this.state.start_address}
               margin="normal"
@@ -70,9 +71,9 @@ class HarassForm extends Component {
           <TextField
             id="description"
             label="Description"
-            helperText="Describe what happened"
+            helperText="Please describe the harasser and how the harassment began and evolved"
             rows={5}
-            rowsMax={10}
+            rowsMax={30}
             name="description"
             value={this.state.description}
             margin="normal"
