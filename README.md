@@ -1,4 +1,4 @@
 # Creepy Follows - Frontend
 This is the repo for the UI of the Creepy Follows application, where creepy follows in Berlin can be reported and displayed on the map. 
 ## Stack
-React frontend UI backed by a Rails 5.2 API
+React frontend UI backed by a Rails 6 API
