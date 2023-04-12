@@ -6,9 +6,9 @@ class HarassForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      start_address: "Type an address",
+      start_address: "",
       happened_at: "",
-      description: "Describe what happened",
+      description: "",
       alert: "",
       editingHarassMarkerId: "",
     };

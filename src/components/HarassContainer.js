@@ -73,7 +73,7 @@ class HarassContainer extends Component {
           <Grid item xs={12} sm={8}>
             <HarassMap harass_markers={this.state.harass_markers} />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4} id={"form"}>
             <Card>
               <CardContent>
                 <Typography>
