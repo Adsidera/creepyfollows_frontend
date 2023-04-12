@@ -31,7 +31,7 @@ class HarassMap extends Component {
               <HarassMarker
                 lat={marker.attributes.latitude}
                 lng={marker.attributes.longitude}
-                text="Creepy Follow here!"
+                text=""
                 key={marker.id}
               />
             );
