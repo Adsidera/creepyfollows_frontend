@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HarassCard from "./HarassCard";
-import { GridList } from "@material-ui/core";
+import { ImageList } from "@mui/material";
 
 class HarassInfo extends Component {
   constructor(props) {
@@ -12,11 +12,11 @@ class HarassInfo extends Component {
 
   render() {
     return (
-      <GridList cols={3}>
+      <ImageList cols={3}>
         {this.props.harass_cases.map(marker => {
           return <HarassCard marker={marker} key={marker.id} />;
         })}
-      </GridList>
+      </ImageList>
     );
   }
 }

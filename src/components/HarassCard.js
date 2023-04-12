@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Typography, GridListTile, Paper, Divider } from "@material-ui/core";
+import { Typography, ImageListItem, Paper, Divider } from "@mui/material";
 
 import moment from "moment";
 
@@ -30,7 +30,7 @@ class HarassCard extends Component {
       },
     };
     return (
-      <GridListTile key="Subheader" style={classes.tile}>
+      <ImageListItem key="Subheader" style={classes.tile}>
         <Paper style={{ margin: 3, padding: 25 }}>
           <Typography variant="h6">
             {this.state.marker.attributes.start_address}
@@ -46,7 +46,7 @@ class HarassCard extends Component {
             Reported on {this.state.friendly_created_at}
           </Typography>
         </Paper>
-      </GridListTile>
+      </ImageListItem>
     );
   }
 }

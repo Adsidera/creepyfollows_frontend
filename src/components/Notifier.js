@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Snackbar from "@material-ui/core/Snackbar";
+import Snackbar from "@mui/material/Snackbar";
 
 let openSnackbarFn;
 

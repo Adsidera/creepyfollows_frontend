@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Card, CardContent, Typography } from "@material-ui/core";
+import { Grid, Card, CardContent, Typography } from "@mui/material";
 import axios from "axios";
 import HarassMap from "./HarassMap";
 import HarassForm from "./HarassForm";
@@ -22,7 +22,7 @@ class HarassContainer extends Component {
 
   componentDidMount() {
     axios
-      .get("https://creepyfollows.herokuapp.com/api/v1/harasses")
+      .get(process.env.REACT_APP_API_URL)
       .then(response => {
         console.log(response);
         this.setState({
@@ -36,7 +36,7 @@ class HarassContainer extends Component {
 
   getHarasses = () => {
     axios
-      .get("https://creepyfollows.herokuapp.com/api/v1/harasses")
+      .get(process.env.REACT_APP_API_URL)
       .then(response => {
         console.log(response);
         this.setState({
@@ -50,7 +50,7 @@ class HarassContainer extends Component {
 
   addNewHarass = ({ harass }) => {
     axios
-      .post("https://creepyfollows.herokuapp.com/api/v1/harasses", {
+      .post(process.env.REACT_APP_API_URL, {
         harass,
       })
       .then(res => {
@@ -88,7 +88,7 @@ class HarassContainer extends Component {
           </Grid>
         </Grid>
         <Notifier />
-        <Grid container direction="row" spacing={24} style={{ padding: 24 }}>
+        <Grid container direction="row" spacing={2} style={{ padding: 24 }}>
           <HarassInfo harass_cases={this.state.harass_markers} />
         </Grid>
       </div>
